@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    // Inline image error fallback handler to prevent race condition
+    document.addEventListener('error', function(e) {
+      if (e.target.tagName === 'IMG') {
+        const BRANDED_FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect width="600" height="600" fill="%23f2edeb"/><circle cx="300" cy="300" r="120" fill="%23ffddb8" opacity="0.4"/><path d="M220 280 L300 200 L380 280 L350 280 L350 400 L250 400 L250 280 Z" fill="%23855300"/><text x="50%22 y="85%22 font-family="Sora, sans-serif" font-size="28" font-weight="bold" fill="%231d1b1b" text-anchor="middle">MAGMAZOES</text><text x="50%22 y="91%22 font-family="JetBrains Mono, monospace" font-size="16" fill="%23747878" text-anchor="middle">ARCHIVE OUT OF BOUNDS</text></svg>';
+        e.target.src = BRANDED_FALLBACK_IMAGE;
+      }
+    }, true);
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAGMAZOES | Login</title>
+<script src="/js/tailwind.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "surface-dim": "#ded9d8",
+                    "inverse-on-surface": "#f5f0ee",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#444748",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "surface-container-low": "#f8f2f1",
+                    "tertiary-fixed": "#b1f2be",
+                    "primary": "#5d5f5f",
+                    "secondary-fixed": "#ffddb8",
+                    "on-tertiary-fixed-variant": "#12512c",
+                    "secondary": "#855300",
+                    "background": "#fdf8f7",
+                    "on-tertiary-fixed": "#00210d",
+                    "inverse-surface": "#32302f",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#747676",
+                    "on-background": "#1d1b1b",
+                    "tertiary": "#2e6a41",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#ece7e6",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#fea619",
+                    "primary-fixed-dim": "#c6c6c7",
+                    "outline": "#747878",
+                    "on-primary-fixed": "#1a1c1c",
+                    "surface-container-highest": "#e6e1e0",
+                    "surface-bright": "#fdf8f7",
+                    "on-tertiary-container": "#468257",
+                    "on-secondary-container": "#684000",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#c6c6c7",
+                    "tertiary-fixed-dim": "#96d5a3",
+                    "surface": "#fdf8f7",
+                    "outline-variant": "#c4c7c8",
+                    "tertiary-container": "#ffffff",
+                    "on-surface": "#1d1b1b",
+                    "primary-fixed": "#e2e2e2",
+                    "surface-tint": "#5d5f5f",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#f2edeb",
+                    "primary-container": "#ffffff",
+                    "on-primary-fixed-variant": "#454747",
+                    "surface-variant": "#e6e1e0",
+                    "on-secondary-fixed": "#2a1700"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "margin-mobile": "16px",
+                    "container-max-width": "1280px",
+                    "unit": "8px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["JetBrains Mono"],
+                    "headline-md": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-md": ["Sora"],
+                    "body-lg": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+        .luxury-gradient-bg {
+            background: radial-gradient(circle at 0% 0%, rgba(254, 166, 25, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(93, 95, 95, 0.03) 0%, transparent 50%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col luxury-gradient-bg selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Hero Background Element -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
+<img class="w-full h-full object-cover grayscale brightness-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjSAkGpfiP4hCutdl2VDqq1SkMslsLjLSpA9oXkBynUnjG0tj1jh1MPtA9FUlPNk0LjOqLE2b77h18MUmK4g6xpav7nwXlGqBNRiU56lCxkCGZcZxxCQPCr-6iQ3o2E2rwRq4mgOun-Zxyfc4_3z0X2qVaHC-imavPRRBf0Qkf0gt4fTo7KVt06e3zHvtmYQcALXzNPD3_9gMg4vFoZhQ5WTQW9Q9wJ06I-MHY0MV8F8somTGbJo5Q-pg4oPoHkW7wAuLQl1GaqrAH"/>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-margin-mobile relative z-10 py-margin-desktop">
+<!-- Login Card -->
+<div class="glass-panel w-full max-w-[480px] p-10 md:p-12 border border-outline-variant/30 rounded-xl shadow-2xl shadow-secondary-container/5 transform transition-all duration-700 hover:shadow-secondary-container/10">
+<!-- Brand Identity -->
+<div class="text-center mb-12">
+<h1 class="font-headline-lg text-headline-lg font-extrabold tracking-tighter text-on-surface mb-2 cursor-pointer" onclick="window.location.href='/'">
+                    MAGMAZOES
+                </h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">
+                    The Art of Movement
+                </p>
+</div>
+<!-- Login Form -->
+<form class="space-y-8">
+<!-- Username Field -->
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 focus:ring-0 focus:border-secondary transition-colors font-body-md text-body-md peer" id="identifier" placeholder=" " type="text"/>
+<label class="absolute left-0 top-3 text-on-surface-variant font-label-md text-label-md transition-all duration-300 pointer-events-none peer-focus:-top-4 peer-focus:text-secondary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-secondary uppercase" for="identifier">
+                        Email/Username
+                    </label>
+</div>
+<!-- Password Field -->
+<div class="relative group">
+<input class="w-full bg-transparent border-0 border-b-2 border-outline-variant py-3 focus:ring-0 focus:border-secondary transition-colors font-body-md text-body-md peer" id="password" placeholder=" " type="password"/>
+<label class="absolute left-0 top-3 text-on-surface-variant font-label-md text-label-md transition-all duration-300 pointer-events-none peer-focus:-top-4 peer-focus:text-secondary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-secondary uppercase" for="password">
+                        Password
+                    </label>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-secondary-container text-on-secondary-container py-5 px-8 font-headline-md text-headline-md font-bold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-4 group" type="submit">
+                    ENTER THE VAULT
+                    <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+</button>
+</form>
+<!-- Signup Redirect -->
+<div class="mt-12 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                    New to the collective?
+                </p>
+<a class="inline-block font-label-md text-label-md text-secondary font-bold hover:tracking-widest transition-all duration-500 uppercase" href="/signup">
+                    Join the Squad
+                </a>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="relative z-10 w-full py-8 border-t border-outline-variant/30 flex justify-center items-center">
+<p class="font-label-sm text-label-sm text-outline tracking-[0.2em]">
+            © 2026 MAGMAZOES. ALL RIGHTS RESERVED.
+        </p>
+</footer>
+<script src="/js/client.js"></script>
+</body></html>

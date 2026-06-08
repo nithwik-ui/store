@@ -1,0 +1,29 @@
+{
+  "name": "stitch_magmazoes_premium_streetwear_store",
+  "version": "1.0.0",
+  "description": "Premium Streetwear E-Commerce Store with Node.js and sql.js database",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "keywords": [
+    "streetwear",
+    "ecommerce",
+    "express",
+    "sql.js"
+  ],
+  "author": "Antigravity AI",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.2",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.21.0",
+    "sql.js": "^1.10.3"
+  }
+}

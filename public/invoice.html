@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Invoice - MAGMAZOES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script src="/js/tailwind.js"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sora: ["Sora", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-border {
+        border-color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-sora p-4 sm:p-8">
+  <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 border border-outline-variant shadow-lg print:border-none print:shadow-none print:p-0">
+    <!-- Error Alert Container -->
+    <div id="error-alert" class="hidden no-print bg-red-100 text-red-800 border border-red-300 p-4 mb-4 rounded flex items-center justify-between">
+      <span id="error-text">Failed to load invoice details.</span>
+      <button onclick="document.getElementById('error-alert').classList.add('hidden')" class="font-bold text-lg leading-none hover:text-red-950">×</button>
+    </div>
+
+    <!-- Action Bar (no-print) -->
+    <div class="no-print flex justify-between items-center mb-8 bg-surface-container-low p-4 border border-outline-variant">
+      <div>
+        <h1 class="text-lg font-bold">Invoice Preview</h1>
+        <p class="text-xs text-on-surface-variant">Ready to print or save as PDF.</p>
+      </div>
+      <div class="flex gap-4">
+        <button onclick="window.print()" class="px-6 py-2.5 bg-secondary text-white font-label-md text-sm hover:scale-105 transition-transform flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">print</span> Print Invoice
+        </button>
+        <button onclick="window.close()" class="px-6 py-2.5 border border-outline-variant text-on-surface font-label-md text-sm hover:bg-surface-container-high transition-colors">
+          Close Window
+        </button>
+      </div>
+    </div>
+
+    <!-- Invoice Header -->
+    <div class="border-b-2 border-on-surface pb-6 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tighter text-secondary">MAGMAZOES</h2>
+        <p class="text-xs text-on-surface-variant font-mono mt-1">TAX INVOICE / BILL OF SUPPLY</p>
+      </div>
+      <div class="text-left sm:text-right font-mono text-xs">
+        <p><strong>Invoice No:</strong> <span id="inv-no">Loading...</span></p>
+        <p><strong>Invoice Date:</strong> <span id="inv-date">Loading...</span></p>
+        <p><strong>Order ID:</strong> <span id="order-id">Loading...</span></p>
+        <p><strong>Order Date:</strong> <span id="order-date">Loading...</span></p>
+      </div>
+    </div>
+
+    <!-- Store & Customer Address Sections -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-xs leading-relaxed">
+      <!-- Sold By -->
+      <div class="p-4 border border-outline-variant rounded">
+        <h3 class="font-bold text-secondary uppercase tracking-wider mb-2">Sold By (Store Info)</h3>
+        <p class="font-bold text-sm" id="store-name">MAGMAZOES Private Limited</p>
+        <p id="store-addr">Loading store address...</p>
+        <p class="mt-2"><strong>GSTIN:</strong> <span id="store-gstin" class="font-mono">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="store-email">Loading...</span></p>
+        <p><strong>Phone:</strong> <span id="store-phone">Loading...</span></p>
+      </div>
+      <!-- Shipped To -->
+      <div class="p-4 border border-outline-variant rounded">
+        <h3 class="font-bold text-secondary uppercase tracking-wider mb-2">Billing / Shipping Details</h3>
+        <p class="font-bold text-sm" id="cust-name">Loading...</p>
+        <p id="cust-addr">Loading...</p>
+        <p class="mt-2"><strong>Email:</strong> <span id="cust-email">Loading...</span></p>
+        <p><strong>Phone:</strong> <span id="cust-phone">Loading...</span></p>
+        <p><strong>State Code:</strong> <span id="cust-state-code" class="font-mono">Loading...</span></p>
+      </div>
+    </div>
+
+    <!-- Items Table -->
+    <div class="border border-outline-variant rounded overflow-hidden mb-8">
+      <table class="w-full text-xs text-left border-collapse">
+        <thead>
+          <tr class="bg-surface-container-low border-b border-outline-variant text-[11px] uppercase tracking-wider font-bold">
+            <th class="p-3 w-10 text-center">#</th>
+            <th class="p-3">Item Description</th>
+            <th class="p-3">HSN Code</th>
+            <th class="p-3 w-20 text-center">Qty</th>
+            <th class="p-3 text-right">Unit Price</th>
+            <th class="p-3 text-right">Taxable Value</th>
+            <th class="p-3 text-right">GST Rate</th>
+            <th class="p-3 text-right">Total (INR)</th>
+          </tr>
+        </thead>
+        <tbody id="items-rows" class="divide-y divide-outline-variant">
+          <!-- Dynamically Injected -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Totals Summary & Tax Breakdowns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-xs">
+      <div>
+        <p class="font-bold text-secondary uppercase tracking-wider mb-2">Payment Information</p>
+        <div class="p-4 bg-surface-container-low border border-outline-variant rounded leading-relaxed">
+          <p><strong>Payment Mode:</strong> <span id="payment-mode">Loading...</span></p>
+          <p><strong>Payment Status:</strong> <span id="payment-status" class="text-tertiary font-bold">PAID</span></p>
+          <p class="mt-2 text-on-surface-variant">This is a system generated computer tax invoice. No signature is required.</p>
+        </div>
+      </div>
+      <div class="space-y-2 font-mono">
+        <div class="flex justify-between">
+          <span class="text-on-surface-variant">Taxable Subtotal:</span>
+          <span id="taxable-sub">₹0.00</span>
+        </div>
+        <div class="flex justify-between" id="cgst-row">
+          <span class="text-on-surface-variant">CGST (9.0%):</span>
+          <span id="cgst-val">₹0.00</span>
+        </div>
+        <div class="flex justify-between" id="sgst-row">
+          <span class="text-on-surface-variant">SGST (9.0%):</span>
+          <span id="sgst-val">₹0.00</span>
+        </div>
+        <div class="flex justify-between" id="igst-row">
+          <span class="text-on-surface-variant">IGST (18.0%):</span>
+          <span id="igst-val">₹0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-on-surface-variant">Shipping & Handling:</span>
+          <span class="text-tertiary">FREE</span>
+        </div>
+        <div class="flex justify-between border-t-2 border-outline-variant pt-2 text-sm font-extrabold">
+          <span>Grand Total:</span>
+          <span id="grand-total" class="text-secondary">₹0.00</span>
+        </div>
+        <div class="text-right text-[10px] text-on-surface-variant mt-2 font-sora italic">
+          Amount in words: <span id="total-words" class="font-bold uppercase">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Terms -->
+    <div class="border-t border-outline-variant mt-12 pt-6 text-[10px] text-on-surface-variant leading-relaxed text-center">
+      <p>Declaration: We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.</p>
+      <p class="font-bold mt-1">Thank you for shopping at MAGMAZOES!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const parts = window.location.pathname.split('/');
+      const orderId = parts[parts.length - 1];
+
+      // Helpers
+      function formatINR(amount) {
+        return new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          maximumFractionDigits: 2
+        }).format(amount).replace('INR', '₹').trim();
+      }
+
+      function numberToWords(num) {
+        const a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+        const b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+        
+        function inWords(n) {
+          if (n < 20) return a[n];
+          if (n < 100) return b[Math.floor(n / 10)] + (n % 10 !== 0 ? '-' + a[n % 10] : '');
+          if (n < 1000) return a[Math.floor(n / 100)] + 'hundred ' + (n % 100 !== 0 ? 'and ' + inWords(n % 100) : '');
+          if (n < 100000) return inWords(Math.floor(n / 1000)) + 'thousand ' + (n % 1000 !== 0 ? ' ' + inWords(n % 1000) : '');
+          if (n < 10000000) return inWords(Math.floor(n / 100000)) + 'lakh ' + (n % 100000 !== 0 ? ' ' + inWords(n % 100000) : '');
+          return inWords(Math.floor(n / 10000000)) + 'crore ' + (n % 10000000 !== 0 ? ' ' + inWords(n % 10000000) : '');
+        }
+
+        const rounded = Math.round(num);
+        if (rounded === 0) return 'zero rupees only';
+        return inWords(rounded) + 'rupees only';
+      }
+
+      function parseShippingAddress(addressStr) {
+        const info = {
+          name: 'Customer',
+          email: 'N/A',
+          phone: 'N/A',
+          locality: '',
+          state: 'Maharashtra',
+          pincode: ''
+        };
+        if (!addressStr) return info;
+        const nameMatch = addressStr.match(/Name:\s*([^,]+)/);
+        const emailMatch = addressStr.match(/Email:\s*([^,]+)/);
+        const phoneMatch = addressStr.match(/Phone:\s*([^,]+)/);
+        const localityMatch = addressStr.match(/Locality:\s*([^,]+)/);
+        const stateMatch = addressStr.match(/State:\s*([^,]+)/);
+        const pincodeMatch = addressStr.match(/Pincode:\s*([^,]+)/);
+        if (nameMatch) info.name = nameMatch[1].trim();
+        if (emailMatch) info.email = emailMatch[1].trim();
+        if (phoneMatch) info.phone = phoneMatch[1].trim();
+        if (localityMatch) info.locality = localityMatch[1].trim();
+        if (stateMatch) info.state = stateMatch[1].trim();
+        if (pincodeMatch) info.pincode = pincodeMatch[1].trim();
+        return info;
+      }
+
+      function renderInvoice(data) {
+        const { order, items, settings } = data;
+
+        // Fill store details
+        document.getElementById('store-name').textContent = settings.store_name || 'MAGMAZOES Private Limited';
+        document.getElementById('store-addr').textContent = settings.store_address || '204, Hype Tower, Bandra West, Mumbai - 400050, Maharashtra, India';
+        document.getElementById('store-gstin').textContent = settings.store_gstin || '27AABCM1234A1Z5';
+        document.getElementById('store-email').textContent = settings.store_email || 'support@magmazoes.com';
+        document.getElementById('store-phone').textContent = settings.store_phone || '+91 98765 43210';
+
+        // Fill order meta
+        document.getElementById('inv-no').textContent = order.invoice_number || `MG-INV-2026-${String(order.id).padStart(5, '0')}`;
+        document.getElementById('inv-date').textContent = new Date(order.created_at).toLocaleDateString();
+        document.getElementById('order-id').textContent = `#${order.id}`;
+        document.getElementById('order-date').textContent = new Date(order.created_at).toLocaleDateString();
+
+        // Fill Customer Details
+        const addr = parseShippingAddress(order.shipping_address);
+        document.getElementById('cust-name').textContent = addr.name;
+        document.getElementById('cust-addr').textContent = `${addr.locality ? addr.locality + ', ' : ''}${addr.state} - ${addr.pincode}`;
+        document.getElementById('cust-email').textContent = addr.email;
+        document.getElementById('cust-phone').textContent = addr.phone;
+        document.getElementById('cust-state-code').textContent = addr.state.toUpperCase();
+
+        // Render Items Table
+        // Footwear standard HSN: 64041190
+        const itemsRows = document.getElementById('items-rows');
+        itemsRows.innerHTML = '';
+        
+        let totalQty = 0;
+        items.forEach((item, idx) => {
+          totalQty += item.quantity;
+          const taxableValue = (item.price * item.quantity) / 1.18; // Reverse GST calculation
+          const row = document.createElement('tr');
+          row.className = 'border-b border-outline-variant';
+          row.innerHTML = `
+            <td class="p-3 text-center">${idx + 1}</td>
+            <td class="p-3">
+              <span class="font-bold">${item.name}</span>
+              <span class="block text-[10px] text-on-surface-variant uppercase">Brand: ${item.brand} | Size: US ${item.size}</span>
+            </td>
+            <td class="p-3 font-mono">64041190</td>
+            <td class="p-3 text-center">${item.quantity}</td>
+            <td class="p-3 text-right">${formatINR(item.price / 1.18)}</td>
+            <td class="p-3 text-right">${formatINR(taxableValue)}</td>
+            <td class="p-3 text-right">18.0%</td>
+            <td class="p-3 text-right font-bold">${formatINR(item.price * item.quantity)}</td>
+          `;
+          itemsRows.appendChild(row);
+        });
+
+        // Fill totals
+        const paymentMethod = order.payment_method || 'Online Payment';
+        document.getElementById('payment-mode').textContent = paymentMethod === 'COD' ? 'Cash on Delivery (COD)' : (paymentMethod === 'UPI' ? 'UPI Payment Gateway' : paymentMethod);
+        
+        const paymentStatusEl = document.getElementById('payment-status');
+        if (paymentMethod === 'COD') {
+          if (order.status === 'Delivered') {
+            paymentStatusEl.textContent = 'PAID';
+            paymentStatusEl.className = 'text-tertiary font-bold';
+          } else {
+            paymentStatusEl.textContent = 'PENDING (COLLECT ON DELIVERY)';
+            paymentStatusEl.className = 'text-error font-bold';
+          }
+        } else {
+          paymentStatusEl.textContent = 'PAID';
+          paymentStatusEl.className = 'text-tertiary font-bold';
+        }
+        
+        // Reverse calculate tax details
+        const totalPaid = order.total;
+        const taxVal = order.tax;
+        const subtotalVal = order.subtotal;
+        const discountVal = subtotalVal - (totalPaid / 1.18);
+        const taxableSubtotal = (subtotalVal - (order.promo_code ? discountVal : 0)) / 1.18;
+
+        document.getElementById('taxable-sub').textContent = formatINR(taxableSubtotal);
+        document.getElementById('grand-total').textContent = formatINR(totalPaid);
+        document.getElementById('total-words').textContent = numberToWords(totalPaid);
+
+        // Tax breakdown (Maharashtra is SGST/CGST, others are IGST)
+        const isMaharashtra = addr.state.toLowerCase().includes('maharashtra');
+        const igstRow = document.getElementById('igst-row');
+        const cgstRow = document.getElementById('cgst-row');
+        const sgstRow = document.getElementById('sgst-row');
+
+        if (isMaharashtra) {
+          igstRow.style.display = 'none';
+          cgstRow.style.display = 'flex';
+          sgstRow.style.display = 'flex';
+          document.getElementById('cgst-val').textContent = formatINR(taxVal / 2);
+          document.getElementById('sgst-val').textContent = formatINR(taxVal / 2);
+        } else {
+          cgstRow.style.display = 'none';
+          sgstRow.style.display = 'none';
+          igstRow.style.display = 'flex';
+          document.getElementById('igst-val').textContent = formatINR(taxVal);
+        }
+
+        // Trigger print dialog auto download after images and components render
+        setTimeout(() => {
+          window.print();
+        }, 600);
+      }
+
+      if (window.INVOICE_DATA) {
+        renderInvoice(window.INVOICE_DATA);
+      } else {
+        fetch(`/api/orders/${orderId}/invoice`)
+          .then(res => {
+            if (!res.ok) throw new Error('Failed to load invoice details.');
+            return res.json();
+          })
+          .then(data => {
+            renderInvoice(data);
+          })
+          .catch(err => {
+            console.error(err);
+            const errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+              document.getElementById('error-text').textContent = 'Failed to load invoice details: ' + err.message;
+              errorAlert.classList.remove('hidden');
+            }
+          });
+      }
+    });
+  </script>
+</body>
+</html>

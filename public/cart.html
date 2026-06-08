@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    // Inline image error fallback handler to prevent race condition
+    document.addEventListener('error', function(e) {
+      if (e.target.tagName === 'IMG') {
+        const BRANDED_FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect width="600" height="600" fill="%23f2edeb"/><circle cx="300" cy="300" r="120" fill="%23ffddb8" opacity="0.4"/><path d="M220 280 L300 200 L380 280 L350 280 L350 400 L250 400 L250 280 Z" fill="%23855300"/><text x="50%22 y="85%22 font-family="Sora, sans-serif" font-size="28" font-weight="bold" fill="%231d1b1b" text-anchor="middle">MAGMAZOES</text><text x="50%22 y="91%22 font-family="JetBrains Mono, monospace" font-size="16" fill="%23747878" text-anchor="middle">ARCHIVE OUT OF BOUNDS</text></svg>';
+        e.target.src = BRANDED_FALLBACK_IMAGE;
+      }
+    }, true);
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="/js/tailwind.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+        input:focus {
+            outline: none;
+            border-bottom-color: #855300 !important;
+        }
+        .gallery-border {
+            border: 1px solid #c4c7c8;
+        }
+        @media (max-width: 768px) {
+            .px-margin-desktop {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-dim": "#ded9d8",
+                        "inverse-on-surface": "#f5f0ee",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#444748",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-container-low": "#f8f2f1",
+                        "tertiary-fixed": "#b1f2be",
+                        "primary": "#5d5f5f",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-fixed-variant": "#12512c",
+                        "secondary": "#855300",
+                        "background": "#fdf8f7",
+                        "on-tertiary-fixed": "#00210d",
+                        "inverse-surface": "#32302f",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#747676",
+                        "on-background": "#1d1b1b",
+                        "tertiary": "#2e6a41",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#ece7e6",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#fea619",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "outline": "#747878",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-container": "#468257",
+                        "on-secondary-container": "#684000",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c6c6c7",
+                        "tertiary-fixed-dim": "#96d5a3",
+                        "surface": "#fdf8f7",
+                        "outline-variant": "#c4c7c8",
+                        "tertiary-container": "#ffffff",
+                        "on-surface": "#1d1b1b",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-tint": "#5d5f5f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f2edeb",
+                        "primary-container": "#ffffff",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface-variant": "#e6e1e0",
+                        "on-secondary-fixed": "#2a1700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-3xl border-b border-outline-variant shadow-sm h-20 flex justify-between items-center px-margin-desktop max-w-container-max-width mx-auto left-0 right-0">
+<div class="font-headline-md text-headline-md font-extrabold tracking-tighter text-on-surface cursor-pointer">MAGMAZOES</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md transition-all" href="#">Hype</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md transition-all" href="#">Shop</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md transition-all" href="#">Collections</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md transition-all" href="#">Resale</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined cursor-pointer hover:scale-105 transition-transform text-secondary">favorite</span>
+<div class="relative cursor-pointer hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-secondary">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full" style="display:none;">0</span>
+</div>
+<span class="material-symbols-outlined cursor-pointer hover:scale-105 transition-transform text-secondary">person</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-24 px-margin-desktop max-w-container-max-width mx-auto">
+<header class="mb-12">
+<h1 class="font-display-lg text-display-lg uppercase tracking-tight">Your Bag</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">0 ITEMS — READY FOR DISPATCH</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Product List Section -->
+<section class="lg:col-span-8 space-y-gutter">
+<!-- Injected by client.js -->
+
+<!-- Shipping Estimator & Promo -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mt-12">
+<div class="space-y-4">
+<h3 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Estimated Shipping</h3>
+<div class="relative">
+<input class="w-full bg-transparent border-b-2 border-outline-variant py-3 font-label-md text-label-md focus:border-secondary transition-colors" placeholder="ENTER POSTAL CODE" type="text"/>
+<button class="absolute right-0 bottom-3">
+<span class="material-symbols-outlined text-secondary">arrow_forward</span>
+</button>
+</div>
+<p class="text-label-sm text-label-sm text-on-surface-variant">Standard delivery (3-5 days) available for your area.</p>
+</div>
+<div class="space-y-4">
+<h3 class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Promo Code</h3>
+<div class="relative">
+<input class="w-full bg-transparent border-b-2 border-outline-variant py-3 font-label-md text-label-md focus:border-secondary transition-colors uppercase" placeholder="APPLY CODE" type="text"/>
+<button class="absolute right-0 bottom-3 font-label-md text-label-md text-secondary font-bold">APPLY</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Order Summary Sidebar -->
+<aside class="lg:col-span-4 lg:sticky lg:top-28">
+<div class="p-8 bg-white gallery-border">
+<h2 class="font-headline-md text-headline-md uppercase mb-8 border-b border-outline-variant pb-4">Order Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-headline-md text-headline-md text-[18px]">₹0.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Shipping</span>
+<span class="font-label-md text-label-md text-tertiary">FREE</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Estimated Tax (18%)</span>
+<span class="font-body-md text-body-md">₹0.00</span>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-outline-variant pt-6 mb-8">
+<span class="font-headline-md text-headline-md uppercase">Total</span>
+<div class="text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">VAT INCLUDED</span>
+<span class="font-display-lg text-[32px] font-extrabold text-secondary tracking-tighter">₹0.00</span>
+</div>
+</div>
+<button class="w-full bg-secondary-container hover:bg-secondary py-5 text-white font-headline-md text-[18px] uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 group">
+                        Secure Checkout
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">lock</span>
+</button>
+<div class="mt-8 pt-8 border-t border-outline-variant grid grid-cols-4 gap-4 opacity-50 grayscale hover:grayscale-0 transition-all cursor-default">
+<div class="h-8 flex items-center justify-center bg-surface-variant">VISA</div>
+<div class="h-8 flex items-center justify-center bg-surface-variant">MC</div>
+<div class="h-8 flex items-center justify-center bg-surface-variant">AMEX</div>
+<div class="h-8 flex items-center justify-center bg-surface-variant">PAY</div>
+</div>
+<div class="mt-8 flex items-start gap-3 p-4 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<div>
+<p class="font-label-md text-label-md font-bold uppercase">Magma Guaranteed</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">100% Authenticity and secure handling.</p>
+</div>
+</div>
+</div>
+<a class="block text-center mt-6 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors uppercase tracking-widest" href="/shop">
+                    Continue Shopping
+                </a>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-white border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-on-surface mb-4">MAGMAZOES</div>
+<p class="font-label-md text-label-md text-on-surface-variant">© 2026 MAGMAZOES. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline-md text-[16px] uppercase tracking-widest">Company</h4>
+<div class="flex flex-col gap-2">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Newsletter</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline-md text-[16px] uppercase tracking-widest">Support</h4>
+<div class="flex flex-col gap-2">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Shipping</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Returns</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline-md text-[16px] uppercase tracking-widest">Legal</h4>
+<div class="flex flex-col gap-2">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<script src="/js/client.js"></script>
+</body></html>

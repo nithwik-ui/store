@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+  <script>
+    // Inline image error fallback handler to prevent race condition
+    document.addEventListener('error', function(e) {
+      if (e.target.tagName === 'IMG') {
+        const BRANDED_FALLBACK_IMAGE = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect width="600" height="600" fill="%23f2edeb"/><circle cx="300" cy="300" r="120" fill="%23ffddb8" opacity="0.4"/><path d="M220 280 L300 200 L380 280 L350 280 L350 400 L250 400 L250 280 Z" fill="%23855300"/><text x="50%22 y="85%22 font-family="Sora, sans-serif" font-size="28" font-weight="bold" fill="%231d1b1b" text-anchor="middle">MAGMAZOES</text><text x="50%22 y="91%22 font-family="JetBrains Mono, monospace" font-size="16" fill="%23747878" text-anchor="middle">ARCHIVE OUT OF BOUNDS</text></svg>';
+        e.target.src = BRANDED_FALLBACK_IMAGE;
+      }
+    }, true);
+  </script>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAGMAZOES | Premium Streetwear Shop</title>
+<script src="/js/tailwind.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-dim": "#ded9d8",
+                        "inverse-on-surface": "#f5f0ee",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#444748",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-container-low": "#f8f2f1",
+                        "tertiary-fixed": "#b1f2be",
+                        "primary": "#5d5f5f",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-fixed-variant": "#12512c",
+                        "secondary": "#855300",
+                        "background": "#fdf8f7",
+                        "on-tertiary-fixed": "#00210d",
+                        "inverse-surface": "#32302f",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#747676",
+                        "on-background": "#1d1b1b",
+                        "tertiary": "#2e6a41",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#ece7e6",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#fea619",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "outline": "#747878",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-container": "#468257",
+                        "on-secondary-container": "#684000",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c6c6c7",
+                        "tertiary-fixed-dim": "#96d5a3",
+                        "surface": "#fdf8f7",
+                        "outline-variant": "#c4c7c8",
+                        "tertiary-container": "#ffffff",
+                        "on-surface": "#1d1b1b",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-tint": "#5d5f5f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f2edeb",
+                        "primary-container": "#ffffff",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface-variant": "#e6e1e0",
+                        "on-secondary-fixed": "#2a1700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-3xl border-b border-outline-variant shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="flex items-center gap-12">
+<div class="font-headline-md text-headline-md font-extrabold tracking-tighter text-on-surface cursor-pointer">MAGMAZOES</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary border-b-2 border-secondary pb-1 font-body-md text-body-md transition-all active:scale-95" href="#">Hype</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md hover:scale-105 transition-transform duration-200 transition-all active:scale-95" href="#">Shop</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md hover:scale-105 transition-transform duration-200 transition-all active:scale-95" href="#">Collections</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md text-body-md hover:scale-105 transition-transform duration-200 transition-all active:scale-95" href="#">Resale</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container border-b-2 border-outline-variant px-4 py-2 w-64 group focus-within:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md font-label-md w-full ml-2" placeholder="Search sneakers..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-secondary hover:scale-105 transition-transform" data-icon="favorite">favorite</button>
+<button class="material-symbols-outlined text-secondary hover:scale-105 transition-transform relative" data-icon="shopping_bag">
+  shopping_bag
+  <span class="absolute -top-1 -right-1 bg-secondary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full" style="display:none;">0</span>
+</button>
+<button class="material-symbols-outlined text-secondary hover:scale-105 transition-transform" data-icon="person">person</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-20 min-h-screen">
+<!-- Hero Header -->
+<header class="px-margin-desktop py-12 max-w-container-max-width mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="font-label-md text-label-md text-secondary tracking-widest uppercase mb-4 block">Seasonal Drop</span>
+<h1 class="font-display-lg text-display-lg max-w-2xl">MAGMAZOES ARCHIVE DROPS</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Sort by:</span>
+<button class="flex items-center gap-2 border-2 border-outline-variant px-6 py-3 font-label-md text-label-md hover:border-secondary transition-colors group">
+                        Featured
+                        <span class="material-symbols-outlined text-sm group-hover:translate-y-0.5 transition-transform">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Product Grid & Sidebar -->
+<section class="px-margin-desktop max-w-container-max-width mx-auto pb-24">
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Sticky Sidebar -->
+<aside class="w-full md:w-64 lg:w-72 flex-shrink-0">
+<div class="sticky top-28 space-y-12">
+<!-- Category Filter -->
+<div>
+  <h3 class="font-headline-md text-body-md font-bold mb-6">Category</h3>
+  <div class="space-y-3" id="shop-categories-list">
+    <!-- Injected dynamically -->
+  </div>
+</div>
+<!-- Store Section Filter -->
+<div>
+  <h3 class="font-headline-md text-body-md font-bold mb-6">Store Section</h3>
+  <div class="space-y-3" id="shop-sections-list">
+    <!-- Injected dynamically -->
+  </div>
+</div>
+<!-- Brand Filter -->
+<div>
+<h3 class="font-headline-md text-body-md font-bold mb-6">Brand</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 border-2 border-outline-variant rounded-none checked:bg-secondary checked:border-secondary focus:ring-0 transition-all" type="checkbox"/>
+<span class="font-label-md text-label-md group-hover:text-secondary">NIKE</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 border-2 border-outline-variant rounded-none checked:bg-secondary checked:border-secondary focus:ring-0 transition-all" type="checkbox"/>
+<span class="font-label-md text-label-md group-hover:text-secondary">ADIDAS</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 border-2 border-outline-variant rounded-none checked:bg-secondary checked:border-secondary focus:ring-0 transition-all" type="checkbox"/>
+<span class="font-label-md text-label-md group-hover:text-secondary">NEW BALANCE</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 border-2 border-outline-variant rounded-none checked:bg-secondary checked:border-secondary focus:ring-0 transition-all" type="checkbox"/>
+<span class="font-label-md text-label-md group-hover:text-secondary">ASICS</span>
+</label>
+</div>
+</div>
+<!-- Size Filter -->
+<div>
+<h3 class="font-headline-md text-body-md font-bold mb-6">Size (US)</h3>
+<div class="grid grid-cols-3 gap-2">
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">7.0</button>
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">8.0</button>
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">9.0</button>
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">10.0</button>
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">11.0</button>
+<button class="h-10 border border-outline-variant hover:border-secondary font-label-sm text-label-sm transition-colors">13.0</button>
+</div>
+</div>
+<!-- Color Filter -->
+<div>
+<h3 class="font-headline-md text-body-md font-bold mb-6">Color</h3>
+<div class="flex flex-wrap gap-4">
+<button class="w-10 h-10 rounded-full bg-[#fea619] border-2 border-secondary-container hover:scale-110 transition-transform ring-offset-2 hover:ring-2 ring-secondary" title="Orange"></button>
+<button class="w-10 h-10 rounded-full bg-black border-2 border-black hover:scale-110 transition-transform ring-offset-2 hover:ring-2 ring-black" title="Black"></button>
+<button class="w-10 h-10 rounded-full bg-white border-2 border-outline-variant hover:scale-110 transition-transform ring-offset-2 hover:ring-2 ring-outline" title="White"></button>
+</div>
+</div>
+<!-- Price Range -->
+<div>
+<h3 class="font-headline-md text-body-md font-bold mb-6">Price Range</h3>
+<div class="space-y-4">
+<input class="w-full h-1 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary" max="150000" min="1000" step="5000" type="range"/>
+<div class="flex justify-between font-label-md text-label-md">
+<span>₹1,000</span>
+<span>₹1,50,000+</span>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-secondary text-white font-label-md text-label-md transition-all hover:scale-105 active:scale-95">RESET FILTERS</button>
+</div>
+</aside>
+<!-- Product Grid (Dense Catalog) -->
+<div class="flex-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-gutter gap-y-12" id="product-grid">
+<!-- Injected by client.js -->
+</div>
+<!-- Loading Indicator for Infinite Scroll feel -->
+<div class="flex flex-col items-center justify-center py-20 space-y-4" style="display:none;">
+<div class="w-8 h-8 border-2 border-secondary border-t-transparent rounded-full animate-spin"></div>
+</div>
+      <!-- Pagination Controls -->
+      <div id="shop-pagination" class="flex justify-center items-center gap-4 mt-8 no-print"></div>
+    </div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-white border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max-width mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-on-surface block mb-6">MAGMAZOES</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Elevating urban footwear to art. High-precision sneakers for the modern gallery aesthetic.</p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6">SHOP</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">Shipping</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">Returns</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6">LEGAL</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#">Newsletter</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-on-surface mb-6">SOCIALS</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 flex items-center justify-center border border-outline-variant hover:border-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center border border-outline-variant hover:border-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</a>
+</div>
+</div>
+</div>
+<div class="border-t border-outline-variant py-8 px-margin-desktop max-w-container-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2026 MAGMAZOES. ALL RIGHTS RESERVED.</p>
+<div class="flex gap-6">
+<span class="font-label-sm text-label-sm text-on-surface-variant">VISA</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">MASTERCARD</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AMEX</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">APPLE PAY</span>
+</div>
+</div>
+</footer>
+<script>
+        // Toggle sticky filter focus
+        const filterButtons = document.querySelectorAll('aside div.grid-cols-3 button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Done in client.js, but keeping basic toggle style
+            });
+        });
+    </script>
+<script src="/js/client.js"></script>
+</body></html>
