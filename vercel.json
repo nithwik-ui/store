@@ -7,68 +7,21 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/order-invoice/(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/admin(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/account(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/shop(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/collection(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/new-arrivals(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/limited-edition(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/resale(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/cart(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/terms(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/login(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/signup(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "src": "/product/(.*)",
-      "dest": "src/server.js"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "src/server.js"
-    }
+    { "src": "/api/(.*)", "dest": "src/server.js" },
+    { "src": "/order-invoice/(.*)", "dest": "src/server.js" },
+    { "src": "/admin(.*)", "dest": "src/server.js" },
+    { "src": "/account(.*)", "dest": "src/server.js" },
+    { "src": "/shop(.*)", "dest": "src/server.js" },
+    { "src": "/collection(.*)", "dest": "src/server.js" },
+    { "src": "/new-arrivals(.*)", "dest": "src/server.js" },
+    { "src": "/limited-edition(.*)", "dest": "src/server.js" },
+    { "src": "/resale(.*)", "dest": "src/server.js" },
+    { "src": "/cart(.*)", "dest": "src/server.js" },
+    { "src": "/terms(.*)", "dest": "src/server.js" },
+    { "src": "/login(.*)", "dest": "src/server.js" },
+    { "src": "/signup(.*)", "dest": "src/server.js" },
+    { "src": "/product/(.*)", "dest": "src/server.js" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "src/server.js" }
   ]
 }
