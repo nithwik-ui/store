@@ -27,7 +27,6 @@ const multer = require('multer');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'magmazoes-premium-streetwear-secret-key-2026';
 
 // Initialize Database
@@ -2694,7 +2693,14 @@ app.use((req, res) => {
   });
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`MAGMAZOES luxury streetwear store is online on http://localhost:${PORT}`);
-});
+// Start Server (for local development and Vercel)
+const PORT = process.env.PORT || 3000;
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`MAGMAZOES luxury streetwear store is online on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel serverless functions
+module.exports = app;
