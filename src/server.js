@@ -42,6 +42,11 @@ app.use(cookieParser());
 // Static files (we will serve images, js, css from /public)
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// Health endpoint for deployment checks
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, env: process.env.NODE_ENV || 'development' });
+});
+
 // Initialize Supabase Clients
 const { createClient } = require('@supabase/supabase-js');
 const SUPABASE_URL = process.env.SUPABASE_URL;
